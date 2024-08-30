@@ -13,7 +13,18 @@
 
     <script>
            
-         
+           const array = [1, 2, 3, 0, null, 2, 4, 5];
+
+        function countTruthy(array) {
+            let count = 0;
+            for (elements of array)
+                console.log(elements, !!elements, elements == true);
+                if (elements == true) count++;
+            return count;
+        }
+
+        
+      console.log(countTruthy(array));
 
     </script>
 
