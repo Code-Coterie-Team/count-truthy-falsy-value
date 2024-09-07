@@ -11,9 +11,9 @@
         <h2>count-truthy-falsy-value</h2>
     </div>
 
-    <script>
+    <!-- <script>
            
-           const array = [1, 2, 3, 0, null, undefined, 4, 5];
+           const array = [1, 2, 3, 0,-5, null, undefined, 4, 5,"",NaN];
 
         function countTruthy(array) {
             let count = 0;
@@ -26,7 +26,42 @@
         
       console.log(countTruthy(array));
 
+    </script>  -->
+
+
+    <h1>شمارش مقادیر Truthy و Falsy</h1>
+    <input type="text" id="userInput" placeholder="مقادیر را وارد کنید (با ویرگول جدا کنید)">
+    <button id="countButton">شمارش</button>
+    <p id="result"></p>
+
+    <script>
+        function countTruthy(array) {
+            let count = 0;
+            for (let element of array) {
+                console.log(element, !!element);
+                if (element) count++;
+            }
+            return count;
+        }
+
+        document.getElementById('countButton').addEventListener('click', function() {
+            const input = document.getElementById('userInput').value;
+            const array = input.split(',').map(item => {
+                item = item.trim(); // برای حذف فضای خالی
+                if (item === 'null') return null;
+                if (item === 'undefined') return undefined;
+                if (item === 'NaN') return NaN;
+                if (!isNaN(item)) return Number(item); // تبدیل به عدد اگر ممکن باشد
+                return item; // بازگرداندن رشته در سایر موارد
+            });
+            
+            const truthyCount = countTruthy(array);
+            document.getElementById('result').innerText = `تعداد مقادیر Truthy: ${truthyCount}`;
+        });
     </script>
+
+
+   
 
 </body>
 </html>
